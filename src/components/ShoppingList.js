@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ItemForm from "./ItemForm";
-import Filter from "./Filter";
+import Dropdown from './Dropdown';
 import Item from "./Item";
 
-function ShoppingList({ items }) {
+
+function ShoppingList({ items, value, onChange, setValue }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   function handleCategoryChange(event) {
@@ -16,17 +16,18 @@ function ShoppingList({ items }) {
     return item.category === selectedCategory;
   });
 
-  return (
-    <div className="ShoppingList">
-      <ItemForm />
-      <Filter onCategoryChange={handleCategoryChange} />
-      <ul className="Items">
-        {itemsToDisplay.map((item) => (
-          <Item key={item.id} name={item.name} category={item.category} />
-        ))}
-      </ul>
+  return <div style={{width: 300}}>
+  <div className="ShoppingList">
+    <div className= "Dropdown">
+      <Dropdown 
+      items={items}
+      prompt="Select Item"
+      value={value}
+      onChange={value => setValue(value)}/>
     </div>
-  );
+    </div>
+  </div>
+;
 }
 
 export default ShoppingList;
